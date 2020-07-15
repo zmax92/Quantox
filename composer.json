@@ -12,5 +12,7 @@
             "App\\": "./"
         }
     },
-    "require": {}
+    "require": {
+        "spatie/array-to-xml": "^2.12"
+    }
 }

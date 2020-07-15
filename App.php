@@ -1,6 +1,8 @@
 <?php
 namespace App;
 
+use Spatie\ArrayToXml\ArrayToXml;
+
 class QueryStudent {
     
     /**
@@ -15,14 +17,14 @@ class QueryStudent {
             where s.id = :id;');
         $statement->bindValue(':id', $id);
 
-        $result = $statement->execute();
+        $result = $statement->execute()->fetchArray();
 
-        if(!empty($result)) {
-            $info_array = $result->fetchArray();
+        if(!empty($result['id'])) {
+            $prepared_data = $this->prepareData($result);
 
-            $prepared_data = $this->prepareData($info_array);
+            $printable_data = $this->printToFormat($prepared_data);
 
-            return $prepared_data;
+            return $printable_data;
         }
         else{
             return 'No sudent found under ID: '.$id;
@@ -73,6 +75,18 @@ class QueryStudent {
                 );
                 break;
         }
+    }
 
+    private function printToFormat(array $data) {
+        switch ($data['Format']) {
+            case 'json':
+                unset($data['Format']);
+                return json_encode($data);
+            default:
+                unset($data['Format']);
+                return ArrayToXml::convert($data, [
+                    'rootElementName' => 'student'
+                ]);
+        }
     }
 }

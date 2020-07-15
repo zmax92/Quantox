@@ -3,12 +3,17 @@
     use App\QueryStudent;
 
     if(!empty($_GET['student'])) {
-        $res = (new QueryStudent())->findStudent( $_GET['student'] );
-
-        print '<pre>'.print_r($res, 1).'</pre>';
+        if(is_numeric($_GET['student'])) {
+            $res = (new QueryStudent())->findStudent( $_GET['student'] );
+    
+            print $res;
+        }
+        else {
+            print 'Student ID must be number';
+        }
     }
     else {
-        print 'missing student ID';
+        print 'Missing student ID';
     }
 
 ?>
