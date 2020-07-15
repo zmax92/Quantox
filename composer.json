@@ -1,0 +1,16 @@
+{
+    "name": "quantox/quantox",
+    "description": "Quantox task",
+    "authors": [
+        {
+            "name": "Boris Žmaher",
+            "email": "zmax92@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DBConnect\\": "dbconnect/"
+        }
+    },
+    "require": {}
+}
