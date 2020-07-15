@@ -9,7 +9,7 @@ class QueryStudent {
      * Function Queries database for student id
      */
     public function findStudent(int $id) {
-        $db = new \SQLite3('db/database.db');
+        $db = new \SQLite3('database.db');
 
         $statement = $db->prepare('Select s.ID as id, s.Name as name, s.Board as board, group_concat(g.Grade, \', \') as grades
             from students s
